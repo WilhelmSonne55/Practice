@@ -1,3 +1,13 @@
+/*
+* - William SUN,
+* 1.the precision of the slope, x, y should be long double, cause there are some big number
+*
+*
+*
+*
+*/
+
+
 /**
  * Definition for a point.
  * struct Point {
@@ -30,11 +40,10 @@ public:
                 
                 if(x==0 && y==0){    //same point = 3, in case all datas are the same point
                     hash.insert({3.0, same_n});
-                    ++same_n; //same point number + other points
-                    //++hash[3.0];
+                    ++same_n;    //same point number + other points(for the following data)
 
-                    for(unordered_map<long double, int>::iterator iter=hash.begin();iter!=hash.end();++iter)
-                        ++(*iter).second;
+                    for(unordered_map<long double, int>::iterator iter=hash.begin();iter!=hash.end();++iter)    
+                        ++(*iter).second;     //for the previous datas
                 }
                 else if(x==0){    //slope is vertical
                     hash.insert({2.0, same_n});    //vertical = 2
@@ -50,8 +59,6 @@ public:
                     max_n = max_n<e.second?e.second:max_n;
             }
         }
-        
-        
         
         return max_n;
     }
