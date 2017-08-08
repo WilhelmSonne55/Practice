@@ -33,13 +33,12 @@ public:
             long double m=0;            
             
             for(int j=i+1;j<points.size();j++){
-                //int same_n=1;
                 Point p2 = points[j];
                 x = p1.x - p2.x;
                 y = p1.y - p2.y;
                 
                 if(x==0 && y==0){    //same point = 3, in case all datas are the same point
-                    hash.insert({3.0, same_n});
+                    hash.insert({3.0, same_n});    //if there is already 3.0, hash.second will keep the same
                     ++same_n;    //same point number + other points(for the following data)
 
                     for(unordered_map<long double, int>::iterator iter=hash.begin();iter!=hash.end();++iter)    
@@ -51,7 +50,7 @@ public:
                 }
                 else{    //common condition
                     m = y/x;
-                    hash.insert({m, same_n}); 
+                    hash.insert({m, same_n});
                     ++hash[m];               
                 }
                     
