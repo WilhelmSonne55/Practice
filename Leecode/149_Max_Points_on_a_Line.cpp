@@ -53,10 +53,10 @@ public:
                     hash.insert({m, same_n});
                     ++hash[m];               
                 }
-                    
-                for(auto& e:hash)
-                    max_n = max_n<e.second?e.second:max_n;
             }
+            
+             for(auto& e:hash)
+                 max_n = max_n<e.second?e.second:max_n;
         }
         
         return max_n;
