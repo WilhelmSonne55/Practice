@@ -18,7 +18,7 @@ char **inArray(char *array1[], int sz1, char *array2[], int sz2, int *lg)
         {
             if (strlen(array1[i]) > strlen(array2[j]) > 0) continue;
 
-            int cs1 = strlen(array1[i]);
+            int cs1 = strlen(array1[i]);    //better not use sizeof, cause array of char will get char* as the element of array
             int cs2 = strlen(array2[j]);
             char *a1 = *(array1 + i);
             char *a2 = *(array2 + j);
