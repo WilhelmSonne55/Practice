@@ -20,28 +20,25 @@ char **inArray(char *array1[], int sz1, char *array2[], int sz2, int *lg)
 
             int cs1 = strlen(array1[i]);
             int cs2 = strlen(array2[j]);
-            char *a1 = *(array1+i);
+            char *a1 = *(array1 + i);
             char *a2 = *(array2 + j);
             char *tmp = malloc( (cs1+1) * sizeof(char)); //substring of a2 used to compare with the a1
             int k = 0;
 
             while (cs1 + k <= cs2)
             {
-                memcpy(tmp, a2 + k, cs1); //move the a2's position and copy to tmp
+                memcpy(tmp, a2 + k, cs1);    //move the a2's position and copy to tmp
                 tmp[cs1]='\0';
 
                 if (strcmp(tmp, a1) == 0)
                 {
                     int q=0;
-                    while(q < *lg){       //in case duplicate
+                    while(q < *lg){        //in case duplicate
                         if(strcmp(tmp,*(r+q) )==0) break;
                         ++q;
                     }
-
-                    if(q != *lg){        //find the duplicate
-                        break;
-                        ++k;
-                    }
+                    
+                    if(q != *lg) break;     //find the duplicate
 
                     int lsize = (*lg)++;
                     *(r + lsize) = malloc(sizeof(tmp));
@@ -52,7 +49,6 @@ char **inArray(char *array1[], int sz1, char *array2[], int sz2, int *lg)
             }
 
             free(tmp);
-            tmp = NULL;
         }
     }
 
