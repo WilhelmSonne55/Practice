@@ -39,7 +39,7 @@ struct linklist{
 					
 				}else{	//last might be the new one's next
 					int i = 1;	//i : size 1. 2. 3. 4.....not from 0
-					while(tmp2->next !=NULL){
+					while(tmp2->next !=NULL){	//find position of insertion, and find last one
 						if(i == n){
 							tmp->next= tmp2->next;
 							tmp2->next = tmp;
