@@ -6,11 +6,6 @@ typedef struct node{
 	
 }Node;
 
-typedef struct linkedlist{
-	Node* head;
-	
-}List;  //only this ?
-
 Node* createNode(int data){
 	Node* tmp = (Node*)malloc(sizeof(Node));
 	tmp->data = data;
