@@ -7,34 +7,31 @@
  * };
  */
 int sumOfLeftLeaves(struct TreeNode* root) {
-    if(root == NULL) return 0;
+    int sum=0;
+    struct TreeNode* tmp = root;
+    struct TreeNode* left;
+    struct TreeNode* right;
     
-    int sum = 0;
-    struct TreeNode* l;
-    struct TreeNode* r;
+    if(tmp==NULL)
+        return 0;
     
-    if(root->right != NULL){    //recursion right child
-        r = root->right;
-        sum += sumOfLeftLeaves(r);
+    if(tmp->right !=NULL){          //recursive right childe
+        right = tmp->right;
+        sum += sumOfLeftLeaves(right);
     }
     
-    if(root->left != NULL)
-        l = root->left;
-    
-     while(l!=NULL){  //iteration left child until the last left child
-         
-        if(l->right !=NULL)     //the case about the left child have right child => recursion
-            sum += sumOfLeftLeaves(l->right);
-        
-         if(l->left !=NULL)
-             l = l->left;
-         else
-             break;
-    } 
-        
-    if(l!= NULL && l->left == NULL && l->right == NULL)
-        sum += l->val;
-    
-        
+    if(tmp->left !=NULL){
+        left =tmp->left;
+        struct TreeNode* prev;     //recorde the previous left childe for left!=NULL
+        while(left!=NULL){         //using left!=NULL instead of left->left!=NULL for not missing left->right !=NULL
+            if(left->right !=NULL)  
+                sum+=sumOfLeftLeaves(left->right);
+            prev = left;
+            left = left->left;
+        }
+        if(prev->right==NULL)
+            sum +=prev->val;   
+    }
+
     return sum;
 }
