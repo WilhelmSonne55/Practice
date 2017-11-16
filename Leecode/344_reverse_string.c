@@ -1,13 +1,12 @@
 char* reverseString(char* s) {
-    int l=strlen(s);
-    char* r = malloc(l+1);
-    r[l]='\0';
-
-    int i=0;
-    while(--l>=0){
-        r[l] = s[i++];
+    char* r;
+    int l = strlen(s);
+    r = malloc(l+1);
+    
+    for(int i=0-1,j=l-i-1;i<l;++i,--j){
+        r[i]=s[j];
     }
-
+    r[l]='\0';
 
     return r;
 }
