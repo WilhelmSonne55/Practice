@@ -1,5 +1,4 @@
 
-
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
@@ -8,53 +7,36 @@ public:
             return 0;
         }
         
-        vector<char> substring;
-        int length = 1;
-        char now = s[0];
-        char next;
-        substring.push_back(now);
+        unordered_map<char, int> substring;
+        unordered_map<char, int>::const_iterator it, it2;
+        int length = 0, tmp = 0;
+        int i = 0, j =0;
         
-        int ret = true;
-        for(int i = 1; i<s.size();i++)
+        while( i < s.size() && j < s.size() )
         {
-            next = s[i];
+            char right = s[j];
+            char left = s[i];
+            it = substring.find(right);
             
-            for(int j = 0; j <substring.size();j++)
+            if( it == substring.end())
             {
-                if(substring[j] == next)
-                {
-                   if(substring.size() > length)
-                    {
-                        length = substring.size();
-                    }
-                    
-                    //flush
-                    if(j ==0)
-                        substring.erase(substring.begin());
-                    else if(j == substring.size()-1)
-                        substring.clear();
-                    else
-                        substring.erase(substring.begin(), substring.begin()+j+1);
-
-                    substring.push_back(next);
-
-                    ret = false;
-                    break;
-                }
-                ret = true;
+                //can't find
+                substring[right] = j;
+                j++;
+            }
+            else
+            {
+                //it2 = substring.find(left);
+                substring.erase(left);
+                i++;
             }
             
-            if(ret == true)
+            tmp = j - i;
+            if(tmp > length)
             {
-                substring.push_back(next);
-            }
-            
-            if(substring.size() > length)
-            {
-                length = substring.size();
+                 length = tmp;
             }
         }
-
         return length;
     }
 };
