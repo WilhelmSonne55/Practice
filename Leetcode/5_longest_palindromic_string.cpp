@@ -12,17 +12,12 @@ public:
            int size_l = 0;
            int size_r = 0;
            size_l = findSubString(i, i, s);
-           size_r = findSubString(i, i+1, s);s
-            :
-            if(size_l > size_r && size_l >= size)
+           size_r = findSubString(i, i+1, s);
+           
+		   int tmp_size = (size_l > size_r)?size_l:size_r;
+            if( tmp_size >= size )
             {
-                size = size_l;
-                int start = i - (size -1)/2 ;
-                ans = s.substr(start, size);
-            }
-            else if(size_r > size_l && size_r >= size )
-            {
-                size = size_r;
+                size = tmp_size;
                 int start = i - (size - 1)/2;
                 ans = s.substr(start, size);
             }
