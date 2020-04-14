@@ -1,17 +1,18 @@
-int digitsIndex[] = {0,3,6,9, 12,15, 19, 22, 26};
 
-void addNext(vector<string>& ans, char c);
-void extendString(vector<string>& ans, string s, int index);
+int numIndex[]={0,3, 6, 9, 12, 15, 19, 22, 26};
+
+vector<string> ans;
+void backtrace(string, string digits);
 
 class Solution {
 public:
     vector<string> letterCombinations(string digits) {
-        vector<string> ans;
-        
-        for(int i=0; i < digits.size(); i++)
+         //ans.clear();
+
+        if(digits.size()!=0)
         {
-            //cout<<"digits[i]:"<<digits[i]<<endl;
-            addNext(ans, digits[i]);
+            string com;              
+            backtrace(com, digits);
         }
         
         return ans;
@@ -19,46 +20,25 @@ public:
 };
 
 
-void extendString(vector<string>& ans, string s, int index)
+void backtrace(string com, string digits)
 {
-    if(index <0 || index > 8)
+    if(digits.size() == 0)
     {
-        cout<<"over flow:"<<index<<endl;
+        ans.push_back(com);
         return;
     }
-    
-    
-        for(int j = digitsIndex[index]; j < digitsIndex[index+1];j++)   
-        {    
-            string tmp = s;
-
-            //cout<<" j:"<<j<<" char:"<<(char)(97+j)<<endl;
-            tmp.push_back((char)(97+j));
-            ans.push_back(tmp);
-        }
-}
-
-void addNext(vector<string>& ans, char c)
-{
-    int index = c-50;
-    int size = ans.size();
-    //cout<<"c:"<<c<<" index:"<<index<<endl;
-    
-    for(int i = 0; ans.size() == 0 || i< size; i++)
+    else
     {
-        if(ans.size() != 0)
+        int index = (digits[0])-50;
+        for(int i = numIndex[index]; i< numIndex[index+1];i++)
         {
-            string stmp = ans[0];
-            
-            //cout<<stmp<<endl;
-            ans.erase(ans.begin());
-            extendString(ans, stmp, index);
-        }
-        else
-        {
-            string stmp;
-            extendString(ans, stmp, index);
-        }
+            string s = com;
+            char c = 97 + i;            
+            cout<<"c:"<<c<<endl;
 
-    }
+            s.push_back(c);
+            backtrace(s, digits.substr(1, digits.size()-1));
+        }
+        return;
+    }  
 }
